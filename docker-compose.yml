@@ -1,0 +1,53 @@
+services:   
+  userservice:
+    build:
+      context: ./UserService
+      dockerfile: Dockerfile
+    ports:
+      - '8080:8080'
+    depends_on:
+      - postgres
+      - rabbitmq
+    
+  orderservice:
+    build:
+      context: ./OrderService
+      dockerfile: Dockerfile
+    ports:
+      - '8081:8080'
+    depends_on:
+      - postgres
+      - rabbitmq
+    
+  notificationservice:
+    build:
+      context: ./NotificationService
+      dockerfile: Dockerfile
+    ports:
+      - '8082:8080'
+    depends_on:
+      - postgres
+      - rabbitmq
+  
+  postgres:
+    image: 'postgres:latest'
+    environment:
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: developerpassword
+      POSTGRES_DB: Linkup
+    ports:
+      - '5432:5432'
+    volumes:
+      - 'pgdata:/var/lib/postgresql/data'
+   
+  rabbitmq:
+    image: "rabbitmq:management"
+    ports:
+      - "5672:5672"
+      - "15672:15672"  # For RabbitMQ management plugin
+    environment:
+      RABBITMQ_DEFAULT_USER: dev
+      RABBITMQ_DEFAULT_PASS: developerpassword
+
+volumes:
+  pgdata:
