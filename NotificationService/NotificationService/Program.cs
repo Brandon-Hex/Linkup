@@ -13,8 +13,6 @@ builder.Services.AddSingleton<RabbitMqService>(sp =>
 });
 builder.Services.AddSingleton<NotificationServiceListener>();
 
-builder.Services.AddHttpClient();
-
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

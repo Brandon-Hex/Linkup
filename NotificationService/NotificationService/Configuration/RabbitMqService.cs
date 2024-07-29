@@ -18,7 +18,6 @@ namespace UserService.Configuration
         private IModel _channel;
         private readonly ILogger<RabbitMqService> _logger;
 
-        // Constructor that takes configuration parameters and logger
         public RabbitMqService(string hostName, string userName, string password, ILogger<RabbitMqService> logger)
         {
             _hostName = hostName;

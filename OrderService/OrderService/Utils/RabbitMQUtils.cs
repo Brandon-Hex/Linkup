@@ -17,22 +17,9 @@ namespace OrderService.Utils
                 var rabbitMqService = scope.ServiceProvider.GetRequiredService<RabbitMqService>();
                 using (var channel = rabbitMqService.CreateChannel())
                 {
-                    // Declare the queue with detailed logging
-                    channel.QueueDeclare(queue: "orderQueue", durable: false, exclusive: false, autoDelete: false, arguments: null);
-
                     var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(newOrder));
-                    Console.WriteLine("About to publish order notification: " + newOrder.ToString());
-                    Console.WriteLine($"UserId: {newOrder.UserId}");
-                    Console.WriteLine($"UserEmail: {newOrder.UserEmail}");
-                    Console.WriteLine($"UserName: {newOrder.UserName}");
-                    Console.WriteLine($"OrderDate: {newOrder.OrderDate}");
-                    Console.WriteLine($"TotalAmount: {newOrder.TotalAmount}");
-                    Console.WriteLine($"Product: {newOrder.Product}");
-                    Console.WriteLine("Body: " + body);
 
-                    // Publish the message with detailed logging
                     channel.BasicPublish(exchange: "", routingKey: "orderQueue", basicProperties: null, body: body);
-                    Console.WriteLine("Message published to orderQueue successfully.");
                 }
             }
         }

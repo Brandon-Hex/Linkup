@@ -53,7 +53,7 @@ public class OrderController : ControllerBase
             await _appDbContext.SaveChangesAsync();
 
             var userDetails = await RabbitMQUtils.requestUserDetailsAsync(_serviceProvider, createOrderDto.UserId);
-            Console.WriteLine(userDetails.Email);
+            _logger.LogInformation(userDetails.Email);
 
             var orderNotification = new SendOrderNotificationDTO()
             {
@@ -64,11 +64,6 @@ public class OrderController : ControllerBase
                 UserEmail = userDetails.Email,
                 UserName = userDetails.Name
             };
-
-            Console.WriteLine($"UserName: {createOrderDto.UserId}");
-            Console.WriteLine($"OrderDate: {createOrderDto.OrderDate}");
-            Console.WriteLine($"TotalAmount: {createOrderDto.TotalAmount}");
-            Console.WriteLine($"Product: {createOrderDto.Product}");
 
             RabbitMQUtils.sendOrderNotification(_serviceProvider, orderNotification);
 

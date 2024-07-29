@@ -4,8 +4,9 @@ public class RabbitMqService : IDisposable
 {
     private IConnection _connection;
     private readonly ConnectionFactory _factory;
+    private readonly ILogger<RabbitMqService> _logger;
 
-    public RabbitMqService(string hostName, string userName, string password)
+    public RabbitMqService(string hostName, string userName, string password, ILogger<RabbitMqService> logger)
     {
         _factory = new ConnectionFactory
         {
@@ -13,6 +14,8 @@ public class RabbitMqService : IDisposable
             UserName = userName,
             Password = password
         };
+
+        _logger = logger;
 
         CreateConnection();
     }
@@ -22,11 +25,11 @@ public class RabbitMqService : IDisposable
         try
         {
             _connection = _factory.CreateConnection();
-            Console.WriteLine("RabbitMQ connection established successfully.");
+            _logger.LogInformation("RabbitMQ connection established successfully.");
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex + "Failed to establish RabbitMQ connection.");
+            _logger.LogError(ex, "Failed to establish RabbitMQ connection.");
             throw;
         }
     }
@@ -37,7 +40,7 @@ public class RabbitMqService : IDisposable
         {
             _connection.Close();
             _connection.Dispose();
-            Console.WriteLine("RabbitMQ connection disposed.");
+            _logger.LogInformation("RabbitMQ connection disposed.");
         }
     }
 
@@ -45,7 +48,7 @@ public class RabbitMqService : IDisposable
     {
         if (_connection == null || !_connection.IsOpen)
         {
-            Console.WriteLine("RabbitMQ connection is not open. Recreating connection.");
+            _logger.LogInformation("RabbitMQ connection is not open. Recreating connection.");
             CreateConnection();
         }
 
