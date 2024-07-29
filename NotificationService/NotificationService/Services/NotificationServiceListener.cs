@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using UserService.Configuration;
 using OrderService.DTO;
+using System.Globalization;
 
 namespace UserService.Services
 {
@@ -35,6 +36,8 @@ namespace UserService.Services
                 var message = Encoding.UTF8.GetString(body);
                 var request = JsonSerializer.Deserialize<SendOrderNotificationDTO>(message);
 
+                var culture = new CultureInfo("en-US");
+
                 _logger.LogInformation(@"
                     -------------------------------------
                     Mocked sending notification to user:
@@ -43,17 +46,16 @@ namespace UserService.Services
                     UserEmail: {UserEmail}
                     UserName: {UserName}
                     OrderDate: {OrderDate}
-                    TotalAmount: {TotalAmount:C}
+                    TotalAmount: {TotalAmount}
                     Product: {Product}
                     -------------------------------------
                     ",
-                    request.UserId,
-                    request.UserEmail,
-                    request.UserName,
-                    request.OrderDate,
-                    request.TotalAmount,
-                    request.Product
-                );
+                request.UserId,
+                request.UserEmail,
+                request.UserName,
+                request.OrderDate,
+                request.TotalAmount.ToString("C", culture),
+                request.Product);
             };
 
             channel.BasicConsume(queue: "orderQueue", autoAck: true, consumer: consumer);
