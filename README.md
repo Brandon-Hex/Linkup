@@ -34,6 +34,7 @@ The application needs approximately 30 to 40 seconds to be fully operational aft
 All services are accessible on localhost (ports forwarded by docker-compose networking)
 - ``UserService``: Port 8080
 - ``OrderService``: Port 8081
+- ``RabbitMQ Manager Console``: Port 15672
 
 ## Output and Monitoring
 
