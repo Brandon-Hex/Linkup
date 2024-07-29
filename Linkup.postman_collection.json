@@ -10,35 +10,7 @@
 			"name": "UserService",
 			"item": [
 				{
-					"name": "http://localhost:8081/orders",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"userId\": 1,\r\n  \"orderDate\": \"2024-07-29T05:43:02.446Z\",\r\n  \"totalAmount\": 230,\r\n  \"product\": \"goeters\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8081/orders",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8081",
-							"path": [
-								"orders"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:8080/users",
+					"name": "Get All Users",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -57,7 +29,35 @@
 					"response": []
 				},
 				{
-					"name": "http://localhost:8080/users/1",
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Testuser\",\r\n  \"email\": \"user@exdample.com\",\r\n  \"dateOfBirth\": \"1995-02-18\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User By ID",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -77,7 +77,7 @@
 					"response": []
 				},
 				{
-					"name": "http://localhost:8080/users/3",
+					"name": "Update User",
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -106,7 +106,7 @@
 					"response": []
 				},
 				{
-					"name": "http://localhost:8080/users/1",
+					"name": "Delete User",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -131,35 +131,7 @@
 			"name": "OrderService",
 			"item": [
 				{
-					"name": "http://localhost:8080/users",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Testuser\",\r\n  \"email\": \"user@exdample.com\",\r\n  \"dateOfBirth\": \"1995-02-18\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/users",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"users"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:8081/orders",
+					"name": "Get All Orders",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -178,7 +150,55 @@
 					"response": []
 				},
 				{
-					"name": "http://localhost:8081/orders/3",
+					"name": "Place Order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": 1,\r\n  \"orderDate\": \"2024-07-29T15:50:14.739Z\",\r\n  \"totalAmount\": 260,\r\n  \"product\": \"Stuff!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/orders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Order By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/orders/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"orders",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Order",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -192,6 +212,35 @@
 							"path": [
 								"orders",
 								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Order",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"product\": \"goeters\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/orders/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"orders",
+								"2"
 							]
 						}
 					},

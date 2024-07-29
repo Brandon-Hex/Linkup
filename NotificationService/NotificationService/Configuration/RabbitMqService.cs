@@ -40,7 +40,7 @@ namespace UserService.Configuration
 
             var retryCount = 0;
             var maxRetries = 5;
-            var retryDelay = TimeSpan.FromSeconds(5);
+            var retryDelay = TimeSpan.FromSeconds(10);
 
             while (retryCount < maxRetries)
             {
