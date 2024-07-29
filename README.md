@@ -29,6 +29,12 @@ docker-compose down -v
 
 The application needs approximately 30 to 40 seconds to be fully operational after the containers are started. This is because services such as RabbitMQ and PostgreSQL need some time to initialize and become ready.
 
+## Exposed Ports
+
+All services are accessible on localhost (ports forwarded by docker-compose networking)
+- ``UserService``: Port 8080
+- ``OrderService``: Port 8081
+
 ## Output and Monitoring
 
 All the services use Loggers to log details out to the console. This means you can view all the activities, errors and mock outputs in the container logs. No logs are persistet to files.
